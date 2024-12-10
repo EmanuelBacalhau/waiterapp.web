@@ -1,4 +1,4 @@
-import logo from '../../assets/images/logo.svg'
+import logo from '../../assets/images/logo.svg';
 
 export const Header = () => {
   return (
@@ -14,5 +14,5 @@ export const Header = () => {
         <img src={logo} alt="WAIRTERAPP" />
       </div>
     </header>
-  )
-}
+  );
+};
