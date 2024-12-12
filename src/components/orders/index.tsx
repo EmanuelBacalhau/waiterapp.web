@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import socketIoClient from 'socket.io-client';
 import type { Order } from '../../types/order';
 import { api } from '../../utils/api';
 import { Board } from '../board';
@@ -10,12 +11,20 @@ export const Orders = () => {
     async function fetchOrders() {
       const { data } = await api.get('/orders');
 
-      console.log(data);
-
       setOrders(data);
     }
 
     fetchOrders();
+  }, []);
+
+  useEffect(() => {
+    const io = socketIoClient('http://localhost:3001', {
+      transports: ['websocket'],
+    });
+
+    io.on('orders@new', (newOrder: Order) => {
+      setOrders(prevOrders => [...prevOrders, newOrder]);
+    });
   }, []);
 
   const waitingOrders = orders.filter(order => order.status === 'WAITING');
