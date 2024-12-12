@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'GeneralSans';
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  src: url('/src/assets/fonts/GeneralSans-Regular.woff2') format('woff2'),
+       url('/src/assets/fonts/GeneralSans-Regular.woff') format('woff'),
+       url('/src/assets/fonts/GeneralSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'GeneralSans';
+  font-weight: 500; /* Medium */
+  font-style: normal;
+  src: url('/src/assets/fonts/GeneralSans-Medium.woff2') format('woff2'),
+       url('/src/assets/fonts/GeneralSans-Medium.woff') format('woff'),
+       url('/src/assets/fonts/GeneralSans-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'GeneralSans';
+  font-weight: 600; /* SemiBold */
+  font-style: normal;
+  src: url('/src/assets/fonts/GeneralSans-Semibold.woff2') format('woff2'),
+       url('/src/assets/fonts/GeneralSans-Semibold.woff') format('woff'),
+       url('/src/assets/fonts/GeneralSans-Semibold.ttf') format('truetype');
+}

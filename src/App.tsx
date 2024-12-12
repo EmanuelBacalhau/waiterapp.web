@@ -1,3 +1,14 @@
+import { ToastContainer } from 'react-toastify';
+import { Header } from './components/header';
+import { Orders } from './components/orders';
+import 'react-toastify/ReactToastify.css';
+
 export function App() {
-  return <h1>Teste</h1>
+  return (
+    <>
+      <Header />
+      <Orders />
+      <ToastContainer position="bottom-center" theme="light" />
+    </>
+  );
 }
