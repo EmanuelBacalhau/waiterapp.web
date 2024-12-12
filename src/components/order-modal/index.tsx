@@ -7,9 +7,19 @@ type Props = {
   visible: boolean;
   order: Order | null;
   onCloseModal: () => void;
+  onCancelOrder: () => void;
+  isLoading: boolean;
+  onChangeStatus: (order: Order) => void;
 };
 
-export const OrderModal = ({ visible, order, onCloseModal }: Props) => {
+export const OrderModal = ({
+  visible,
+  order,
+  onCloseModal,
+  onCancelOrder,
+  isLoading,
+  onChangeStatus,
+}: Props) => {
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
@@ -108,11 +118,13 @@ export const OrderModal = ({ visible, order, onCloseModal }: Props) => {
             <strong>{formatCurrency(total)}</strong>
           </div>
 
-          {order.status !== 'DONE' && (
-            <footer className="space-y-2 mt-4">
+          <footer className="space-y-2 mt-4">
+            {order.status !== 'DONE' && (
               <button
                 type="button"
-                className="bg-gray-600 hover:bg-gray-700 transition-colors text-center w-full space-x-2 p-3 rounded-full"
+                className="bg-gray-600 hover:bg-gray-700 transition-colors text-center w-full space-x-2 p-3 rounded-full disabled:cursor-not-allowed disabled:opacity-50"
+                disabled={isLoading}
+                onClick={() => onChangeStatus(order)}
               >
                 <span>{order.status === 'WAITING' ? '🧑‍🍳' : '✅'}</span>
                 <strong className="text-white">
@@ -121,15 +133,16 @@ export const OrderModal = ({ visible, order, onCloseModal }: Props) => {
                     : 'Finalizar'}
                 </strong>
               </button>
-
-              <button
-                type="button"
-                className="w-full p-3 rounded-full text-center hover:bg-red-600/10 text-red-600  transition-colors"
-              >
-                <strong>Cancelar pedido</strong>
-              </button>
-            </footer>
-          )}
+            )}
+            <button
+              type="button"
+              className="w-full p-3 rounded-full text-center hover:bg-red-600/10 text-red-600 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+              onClick={onCancelOrder}
+              disabled={isLoading}
+            >
+              <strong>Cancelar pedido</strong>
+            </button>
+          </footer>
         </div>
       </div>
     </div>
